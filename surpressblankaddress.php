@@ -110,6 +110,7 @@ function surpressblankaddress_civicrm_alterSettingsFolders(&$metaDataFolders = N
 function surpressblankaddress_civicrm_tokens(&$tokens) {
   $tokens['contact']['contact.address_block'] = 'Address block';
   $tokens['contact']['contact.today_date'] = 'Today Date';
+  $tokens['contact']['contact.billing_block'] = 'Billing block';
 }
 
 function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null, $tokens = array(), $context = null ) {
@@ -118,11 +119,34 @@ function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null,
     $contact  = civicrm_api( 'Contact' , 'get' , $params );
     
     if(!$contact['is_error']) {
+      $originalContact      = $contact['values'][$id];
+      $billingAddressQuery  = "SELECT * FROM `civicrm_address` WHERE `contact_id` = %1 and `is_billing` = %2";
+      $billingParams        = array(1 => array($contact['id'], 'Int'), 2 => array(1, 'Int'));
+      $billingDao           = CRM_Core_DAO::executeQuery($billingAddressQuery, $billingParams);
+      if($billingDao->fetch()) {
+        $billingAddressFields = array(
+          'street_address'         => $billingDao->street_address,
+          'supplemental_address_1' => $billingDao->supplemental_address_1,
+          'supplemental_address_2' => $billingDao->supplemental_address_2,
+          'city'                   => $billingDao->city,
+          'postal_code'            => $billingDao->postal_code,
+          'state_province_id'      => $billingDao->state_province_id,
+          
+        );
+      }
       if(!empty($contact['values'][$id]['state_province_id'])) {
         $contact['values'][$id]['state_province_name'] = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $contact['values'][$id]['state_province_id'], 'name', 'id');
       }
       $values[$id]['contact.address_block'] = nl2br(CRM_Utils_Address::format($contact['values'][$id]));
       $values[$id]['contact.today_date'] = CRM_Utils_Date::customFormat(date('Ymd'));
+      
+      if($billingAddressFields) {
+        $billingContact = array_merge($originalContact, $billingAddressFields);
+        if(!empty($billingContact['state_province_id'])) {
+          $billingContact['state_province_name']  = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $billingContact['state_province_id'], 'name', 'id');
+        }
+        $values[$id]['contact.billing_block']     = nl2br(CRM_Utils_Address::format($billingContact));
+      }
       
     }
   }
