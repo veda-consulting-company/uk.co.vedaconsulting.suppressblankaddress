@@ -137,7 +137,7 @@ function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null,
       if(!empty($contact['values'][$id]['state_province_id'])) {
         $contact['values'][$id]['state_province_name'] = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $contact['values'][$id]['state_province_id'], 'name', 'id');
       }
-      $values[$id]['contact.address_block'] = nl2br(CRM_Utils_Address::format($contact['values'][$id]));
+      $values[$id]['contact.address_block'] = nl2br(CRM_Utils_Address::format($contact['values'][$id]), NULL, FALSE, TRUE);
       $values[$id]['contact.today_date'] = CRM_Utils_Date::customFormat(date('Ymd'));
       
       if($billingAddressFields) {
@@ -145,7 +145,7 @@ function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null,
         if(!empty($billingContact['state_province_id'])) {
           $billingContact['state_province_name']  = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $billingContact['state_province_id'], 'name', 'id');
         }
-        $values[$id]['contact.billing_block']     = nl2br(CRM_Utils_Address::format($billingContact));
+        $values[$id]['contact.billing_block']     = nl2br(CRM_Utils_Address::format($billingContact, NULL, FALSE, TRUE));
       }
       
     }
