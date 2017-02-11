@@ -1,4 +1,4 @@
-Package: uk.co.vedaconsulting.surpressblankaddress
+Package: uk.co.vedaconsulting.suppresblankaddress
 Copyright (C) 2014, FIXME <FIXME>
 Licensed under the GNU Affero Public License 3.0 (below).
 
