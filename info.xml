@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<extension key="uk.co.vedaconsulting.suppresblankaddress" type="module">
-  <file>suppresblankaddress</file>
+<extension key="uk.co.vedaconsulting.suppressblankaddress" type="module">
+  <file>suppressblankaddress</file>
   <name>Suppress Blank Address</name>
   <description>Tokens to suppress blank primary and billing addresses and today date</description>
   <license>AGPL-3.0</license>
@@ -20,6 +20,6 @@
     <namespace>CRM/Surpressblankaddress</namespace>
   </civix>
   <urls>
-    <url desc="Documentation">https://github.com/veda-consulting/uk.co.vedaconsulting.suppresblankaddress/blob/master/README.md</url>
+    <url desc="Documentation">https://github.com/veda-consulting/uk.co.vedaconsulting.suppressblankaddress/blob/master/README.md</url>
   </urls>
 </extension>
