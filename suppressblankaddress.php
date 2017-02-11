@@ -109,7 +109,7 @@ function suppresblankaddress_civicrm_alterSettingsFolders(&$metaDataFolders = NU
 
 function suppresblankaddress_civicrm_tokens(&$tokens) {
   $tokens['contact']['contact.address_block'] = 'Address block';
-  $tokens['contact']['contact.today_date'] = 'Today Date';
+  $tokens['contact']['contact.today_date'] = "Today's Date";
   $tokens['contact']['contact.billing_block'] = 'Billing block';
 }
 
