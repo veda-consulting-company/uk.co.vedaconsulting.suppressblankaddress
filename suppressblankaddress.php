@@ -1,14 +1,14 @@
 <?php
 
-require_once 'surpressblankaddress.civix.php';
+require_once 'suppressblankaddress.civix.php';
 
 /**
  * Implementation of hook_civicrm_config
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
  */
-function surpressblankaddress_civicrm_config(&$config) {
-  _surpressblankaddress_civix_civicrm_config($config);
+function suppressblankaddress_civicrm_config(&$config) {
+  _suppressblankaddress_civix_civicrm_config($config);
 }
 
 /**
@@ -18,8 +18,8 @@ function surpressblankaddress_civicrm_config(&$config) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
  */
-function surpressblankaddress_civicrm_xmlMenu(&$files) {
-  _surpressblankaddress_civix_civicrm_xmlMenu($files);
+function suppressblankaddress_civicrm_xmlMenu(&$files) {
+  _suppressblankaddress_civix_civicrm_xmlMenu($files);
 }
 
 /**
@@ -27,8 +27,8 @@ function surpressblankaddress_civicrm_xmlMenu(&$files) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
-function surpressblankaddress_civicrm_install() {
-  return _surpressblankaddress_civix_civicrm_install();
+function suppressblankaddress_civicrm_install() {
+  return _suppressblankaddress_civix_civicrm_install();
 }
 
 /**
@@ -36,8 +36,8 @@ function surpressblankaddress_civicrm_install() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
-function surpressblankaddress_civicrm_uninstall() {
-  return _surpressblankaddress_civix_civicrm_uninstall();
+function suppressblankaddress_civicrm_uninstall() {
+  return _suppressblankaddress_civix_civicrm_uninstall();
 }
 
 /**
@@ -45,8 +45,8 @@ function surpressblankaddress_civicrm_uninstall() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
-function surpressblankaddress_civicrm_enable() {
-  return _surpressblankaddress_civix_civicrm_enable();
+function suppressblankaddress_civicrm_enable() {
+  return _suppressblankaddress_civix_civicrm_enable();
 }
 
 /**
@@ -54,8 +54,8 @@ function surpressblankaddress_civicrm_enable() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
-function surpressblankaddress_civicrm_disable() {
-  return _surpressblankaddress_civix_civicrm_disable();
+function suppressblankaddress_civicrm_disable() {
+  return _suppressblankaddress_civix_civicrm_disable();
 }
 
 /**
@@ -69,8 +69,8 @@ function surpressblankaddress_civicrm_disable() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
  */
-function surpressblankaddress_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _surpressblankaddress_civix_civicrm_upgrade($op, $queue);
+function suppressblankaddress_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
+  return _suppressblankaddress_civix_civicrm_upgrade($op, $queue);
 }
 
 /**
@@ -81,8 +81,8 @@ function surpressblankaddress_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_managed
  */
-function surpressblankaddress_civicrm_managed(&$entities) {
-  return _surpressblankaddress_civix_civicrm_managed($entities);
+function suppressblankaddress_civicrm_managed(&$entities) {
+  return _suppressblankaddress_civix_civicrm_managed($entities);
 }
 
 /**
@@ -94,8 +94,8 @@ function surpressblankaddress_civicrm_managed(&$entities) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
  */
-function surpressblankaddress_civicrm_caseTypes(&$caseTypes) {
-  _surpressblankaddress_civix_civicrm_caseTypes($caseTypes);
+function suppressblankaddress_civicrm_caseTypes(&$caseTypes) {
+  _suppressblankaddress_civix_civicrm_caseTypes($caseTypes);
 }
 
 /**
@@ -103,22 +103,21 @@ function surpressblankaddress_civicrm_caseTypes(&$caseTypes) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
  */
-function surpressblankaddress_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _surpressblankaddress_civix_civicrm_alterSettingsFolders($metaDataFolders);
+function suppressblankaddress_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
+  _suppressblankaddress_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
-function surpressblankaddress_civicrm_tokens(&$tokens) {
+function suppressblankaddress_civicrm_tokens(&$tokens) {
   $tokens['contact']['contact.address_block'] = 'Address block';
-  $tokens['contact']['contact.today_date'] = 'Today Date';
+  $tokens['contact']['contact.today_date'] = "Today's Date";
   $tokens['contact']['contact.billing_block'] = 'Billing block';
 }
 
-function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null, $tokens = array(), $context = null ) {
+function suppressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null, $tokens = array(), $context = null ) {
   foreach($cids as $id){
-    $params   = array('contact_id' => $id, 'version' => 3,);
-    $contact  = civicrm_api( 'Contact' , 'get' , $params );
-    
-    if(!$contact['is_error']) {
+    $params   = array('contact_id' => $id);
+    try {
+      $contact  = civicrm_api3( 'Contact' , 'get' , $params );
       $originalContact      = $contact['values'][$id];
       $billingAddressQuery  = "SELECT * FROM `civicrm_address` WHERE `contact_id` = %1 and `is_billing` = %2";
       $billingParams        = array(1 => array($contact['id'], 'Int'), 2 => array(1, 'Int'));
@@ -137,17 +136,20 @@ function surpressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null,
       if(!empty($contact['values'][$id]['state_province_id'])) {
         $contact['values'][$id]['state_province_name'] = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $contact['values'][$id]['state_province_id'], 'name', 'id');
       }
-      $values[$id]['contact.address_block'] = nl2br(CRM_Utils_Address::format($contact['values'][$id]), NULL, FALSE, TRUE);
-      $values[$id]['contact.today_date'] = CRM_Utils_Date::customFormat(date('Ymd'));
+      $values[$id]['contact.address_block'] = nl2br(CRM_Utils_Address::format($contact['values'][$id]), FALSE);
+    }
+    catch (CiviCRM_API3_Exception $e) {
+      $values[$id]['contact.address_block'] = $e->getMessage;
+    }
+
+    $values[$id]['contact.today_date'] = CRM_Utils_Date::customFormat(date('Ymd'));
       
-      if($billingAddressFields) {
-        $billingContact = array_merge($originalContact, $billingAddressFields);
-        if(!empty($billingContact['state_province_id'])) {
-          $billingContact['state_province_name']  = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $billingContact['state_province_id'], 'name', 'id');
-        }
-        $values[$id]['contact.billing_block']     = nl2br(CRM_Utils_Address::format($billingContact, NULL, FALSE, TRUE));
+    if($billingAddressFields) {
+      $billingContact = array_merge($originalContact, $billingAddressFields);
+      if(!empty($billingContact['state_province_id'])) {
+        $billingContact['state_province_name']  = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_StateProvince', $billingContact['state_province_id'], 'name', 'id');
       }
-      
+      $values[$id]['contact.billing_block']     = nl2br(CRM_Utils_Address::format($billingContact, FALSE));
     }
   }
 }
