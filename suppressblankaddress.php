@@ -114,6 +114,8 @@ function suppressblankaddress_civicrm_tokens(&$tokens) {
 }
 
 function suppressblankaddress_civicrm_tokenValues( &$values, $cids, $job = null, $tokens = array(), $context = null ) {
+  if (is_null($cids) ) { $cids = array(); }
+  
   foreach($cids as $id){
     $params   = array('contact_id' => $id);
     try {
